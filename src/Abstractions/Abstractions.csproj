@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <RootNamespace>vm2.Abstractions</RootNamespace>
+    </PropertyGroup>
+
+    <PropertyGroup Label="NuGet">
+        <PackageId>vm2.Abstractions</PackageId>
+        <Title>vm2 Abstractions</Title>
+        <Description>vm2 Abstractions package skeleton.</Description>
+        <PackageTags>vm2 Abstractions library template</PackageTags>
+        <PackageProjectUrl>https://github.com/vmelamed/vm2.Abstractions</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/vmelamed/vm2.Abstractions</RepositoryUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="../../README.md" Pack="true" PackagePath="\">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Include="../../LICENSE" Pack="true" PackagePath="\">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Include="../../CHANGELOG.md" Pack="true" PackagePath="\">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+</Project>

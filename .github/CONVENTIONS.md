@@ -66,6 +66,7 @@ The project owner is a non-native English speaker.
 - Recommend better wording for unclear, passive, or awkward sentences
 - Prefer active voice
 - Explain why a suggested change improves the text
+- When suggesting a correction, add one short sentence that states exactly what changed and why, especially for small edits such as punctuation, articles, or word order.
 - Examples:
   - ❌ "The pattern is being matched by the enumerator"
   - ✅ "The enumerator matches the pattern"
@@ -166,6 +167,7 @@ The project owner is a non-native English speaker.
 - **Nullable reference types always enabled**; treat warnings as design feedback.
 - **No static mutable state** unless guarded with **proper encapsulation and synchronization** (prefer `ReaderWriterLockSlim` over `Lock`, `Mutex`, `Event`)
 - **Dependency injection** over service locator
+- Use `System.TimeProvider` (.NET 8 BCL) for time abstraction and `FakeTimeProvider` (from `Microsoft.Extensions.TimeProvider.Testing`) for tests — **never** introduce a homegrown `IClock`-style interface (Val!)
 - Guard clauses at method entry (throw early, no nested pyramids)
 - Pattern matching (`is`, `switch` expressions) over `if`/`else` chains when semantically clearer
 - No curly braces for single-line blocks unless they improve readability

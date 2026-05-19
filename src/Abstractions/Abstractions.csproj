@@ -7,8 +7,8 @@
     <PropertyGroup Label="NuGet">
         <PackageId>vm2.Abstractions</PackageId>
         <Title>vm2 Abstractions</Title>
-        <Description>vm2 Abstractions package skeleton.</Description>
-        <PackageTags>vm2 Abstractions library template</PackageTags>
+        <Description>vThe m2.Abstractions package defines some common interfaces and some default providers: IClock, ITenant, ICurrentTenant, IValidatable, etc.</Description>
+        <PackageTags>vm2 Abstractions library package</PackageTags>
         <PackageProjectUrl>https://github.com/vmelamed/vm2.Abstractions</PackageProjectUrl>
         <RepositoryUrl>https://github.com/vmelamed/vm2.Abstractions</RepositoryUrl>
         <PackageReadmeFile>README.md</PackageReadmeFile>

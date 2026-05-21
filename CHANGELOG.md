@@ -1,5 +1,19 @@
 # Changelog
 
+## v1.0.0-preview.1 - 2026-05-21
+
+### Internal
+
+- initial scaffold
+- Bump the minor-and-patch group with 14 updates
+- update dependencies and improve project conventions
+- update copilot instructions package name to vm2.Abstractions
+- sync with diff-shared.sh
+- update vm2.TestUtilities to version 1.5.1
+- fix typo in conventions for merge or copy action description
+- improve wording in CI warning message and conventions documentation
+- update vm2.TestUtilities to version 1.5.1 and remove unused dependencies
+
 All notable changes to this project will be documented in this file.
 
 ## [0.0.0] - YYYY-MM-DD

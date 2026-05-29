@@ -15,26 +15,26 @@ A starter vm2 package scaffold. Customize the code, tests, benchmarks, docs, and
   - from **CLI**, if it is not built yet (builds on MTP v2):
 
     ```bash
-    dotnet run --project test/Abstractions.Tests/Abstractions.Tests.csproj`
+    dotnet run --project tests/Abstractions.Tests/Abstractions.Tests.csproj`
     ```
 
   - from **CLI**, if it is already built in **CLI** or **VSCode** (MTP v2):
     - any OS or shell:
 
       ```bash
-      dotnet test test/Abstractions.Tests/bin/Debug/net10.0/Abstractions.Tests.dll`
+      dotnet test tests/Abstractions.Tests/bin/Debug/net10.0/Abstractions.Tests.dll`
       ```
 
     - on Windows **CLI** (already built in **CLI** or **VSCode** - on MTP v2):
 
       ```batch
-      test/Abstractions.Tests/bin/Debug/net10.0/Abstractions.Tests.exe`
+      tests/Abstractions.Tests/bin/Debug/net10.0/Abstractions.Tests.exe`
       ```
 
     - on Linux or MacOS **CLI** (already built in **CLI** or **VSCode** - on MTP v2):
 
       ```bash
-      test/Abstractions.Tests/bin/Debug/net10.0/Abstractions.Tests`
+      tests/Abstractions.Tests/bin/Debug/net10.0/Abstractions.Tests`
       ```
 
   - from Visual Studio:
@@ -66,7 +66,7 @@ A starter vm2 package scaffold. Customize the code, tests, benchmarks, docs, and
 
 - .github/workflows: CI, prerelease, release, clear-cache.
 - src/Abstractions: the library source code
-- test/Abstractions.Tests: xUnit + MTP tests, includes testconfig.json
+- tests/Abstractions.Tests: xUnit + MTP tests, includes testconfig.json
 - benchmarks/Abstractions.Benchmarks: BenchmarkDotNet suite (optional)
 - examples/Abstractions.Example: minimal console sample (optional)
 - docs/: documentation starter (optional)

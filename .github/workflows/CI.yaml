@@ -56,7 +56,7 @@ env:
     ]
   TEST_PROJECTS: >-
     [
-    "test/Abstractions.Tests/Abstractions.Tests.csproj"
+    "tests/Abstractions.Tests/Abstractions.Tests.csproj"
     ]
   BENCHMARK_PROJECTS: "[]"
   PACKAGE_PROJECTS: >-

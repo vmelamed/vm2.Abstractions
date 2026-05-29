@@ -67,6 +67,7 @@ A starter vm2 package scaffold. Customize the code, tests, benchmarks, docs, and
 - .github/workflows: CI, prerelease, release, clear-cache.
 - src/Abstractions: the library source code
 - tests/Abstractions.Tests: xUnit + MTP tests, includes testconfig.json
+- tests/Abstractions.Tests: xUnit + MTP tests, includes testconfig.json
 - benchmarks/Abstractions.Benchmarks: BenchmarkDotNet suite (optional)
 - examples/Abstractions.Example: minimal console sample (optional)
 - docs/: documentation starter (optional)

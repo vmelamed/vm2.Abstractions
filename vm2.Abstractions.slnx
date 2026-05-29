@@ -39,7 +39,7 @@
     <Folder Name="/src/">
         <Project Path="src/Abstractions/Abstractions.csproj" />
     </Folder>
-    <Folder Name="/test/">
-        <Project Path="test/Abstractions.Tests/Abstractions.Tests.csproj" />
+    <Folder Name="/tests/">
+        <Project Path="tests/Abstractions.Tests/Abstractions.Tests.csproj" />
     </Folder>
 </Solution>

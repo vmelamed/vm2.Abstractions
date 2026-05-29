@@ -52,7 +52,7 @@ Key design decisions:
   │       ├── Abstractions.csproj
   │       ├── Abstractions.Api.cs
   │       └── usings.cs
-  ├── test/                     # Test projects (highly recommended)
+  ├── tests/                    # Test projects (highly recommended)
   │   └── vm2.<name>.Tests/
   │       ├── Abstractions.Tests.csproj
   │       ├── AbstractionsApiTests.cs
@@ -82,10 +82,10 @@ Key design decisions:
 dotnet build vm2.Abstractions.slnx
 
 # Run all tests (MTP v2 — each project is a compiled executable)
-dotnet test --project test/Abstractions.Tests/Abstractions.Tests.csproj
+dotnet test --project tests/Abstractions.Tests/Abstractions.Tests.csproj
 
 # Run a single test by name (MTP v2 filter syntax)
-dotnet test --project test/Abstractions.Tests/Abstractions.Tests.csproj --filter "MethodName_WhenCondition_ShouldOutcome"
+dotnet test --project tests/Abstractions.Tests/Abstractions.Tests.csproj --filter "MethodName_WhenCondition_ShouldOutcome"
 
 # Pack NuGet package
 dotnet pack vm2.Abstractions.slnx --configuration Release

@@ -3,29 +3,30 @@
     <PropertyGroup>
         <!-- Property to be used in conditions for detecting the solution's main product projects -->
         <IsProductProject Condition="
-            $([System.Text.RegularExpressions.Regex]::IsMatch($(MSBuildProjectDirectory), '[/\\]src[/\\]', System.Text.RegularExpressions.RegexOptions.IgnoreCase)) OR
-            $([System.Text.RegularExpressions.Regex]::IsMatch($(MSBuildProjectDirectory), '\.Templates$', System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+            $([System.Text.RegularExpressions.Regex]::IsMatch($(MSBuildProjectDirectory), '[/\\]src[/\\]', System.Text.RegularExpressions.RegexOptions.IgnoreCase))
             ">true</IsProductProject>
 
         <!-- Property to be used in conditions for detecting test projects -->
         <IsTestProject Condition="
             $([System.Text.RegularExpressions.Regex]::IsMatch($(MSBuildProjectDirectory), '[/\\]tests?[/\\]', System.Text.RegularExpressions.RegexOptions.IgnoreCase)) AND
-            $([System.Text.RegularExpressions.Regex]::IsMatch($(MSBuildProjectName), '\.Tests$', System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+            $([System.Text.RegularExpressions.Regex]::IsMatch($(MSBuildProjectName), '.*\.Tests$', System.Text.RegularExpressions.RegexOptions.IgnoreCase))
             ">true</IsTestProject>
 
         <!-- Property to be used in conditions for detecting test library projects (test utilities, test extensions, etc.) -->
         <IsTestLibraryProject Condition="
             $([System.Text.RegularExpressions.Regex]::IsMatch($(MSBuildProjectDirectory), '[/\\]tests?[/\\]', System.Text.RegularExpressions.RegexOptions.IgnoreCase)) AND
-            !$([System.Text.RegularExpressions.Regex]::IsMatch($(MSBuildProjectName), '\.Tests$', System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+            !$([System.Text.RegularExpressions.Regex]::IsMatch($(MSBuildProjectName), '.*\.Tests$', System.Text.RegularExpressions.RegexOptions.IgnoreCase))
             ">true</IsTestLibraryProject>
 
         <!-- Property to be used in conditions for detecting benchmark tests -->
         <IsInBenchmarksFolder Condition="
             $([System.Text.RegularExpressions.Regex]::IsMatch($(MSBuildProjectDirectory), '[/\\]benchmarks?[/\\]', System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+            $([System.Text.RegularExpressions.Regex]::IsMatch($(MSBuildProjectDirectory), '[/\\]benchmarks?[/\\]', System.Text.RegularExpressions.RegexOptions.IgnoreCase))
             ">true</IsInBenchmarksFolder>
 
         <!-- Property to be used in conditions for detecting example usage projects -->
         <IsInExamplesFolder Condition="
+            $([System.Text.RegularExpressions.Regex]::IsMatch($(MSBuildProjectDirectory), '[/\\]examples?[/\\]', System.Text.RegularExpressions.RegexOptions.IgnoreCase))
             $([System.Text.RegularExpressions.Regex]::IsMatch($(MSBuildProjectDirectory), '[/\\]examples?[/\\]', System.Text.RegularExpressions.RegexOptions.IgnoreCase))
             ">true</IsInExamplesFolder>
     </PropertyGroup>
@@ -106,8 +107,12 @@
 
     <!-- ================ Common Package References for All projects ================ -->
     <ItemGroup>
-        <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="all" />
-        <PackageReference Include="MinVer" PrivateAssets="all" />
+        <PackageReference Include="Microsoft.SourceLink.GitHub">
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="MinVer">
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
         <!-- Add more, repo-specific package references below in the designated placeholder -->
     </ItemGroup>
 
@@ -266,7 +271,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <!-- ADD REPO-SPECIFIC PACKAGE REFERENCES HERE -->
+        <!-- Add repo-specific package references here -->
+        <PackageReference Include="System.Configuration.ConfigurationManager" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Binder" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" />
+        <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+        <PackageReference Include="Microsoft.Extensions.Logging" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Configuration" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" />
     </ItemGroup>
 
 </Project>

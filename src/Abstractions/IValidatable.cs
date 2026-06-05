@@ -1,4 +1,7 @@
-﻿namespace vm2.Abstractions;
+﻿// SPDX-License-Identifier: MIT
+// Copyright (c) 2025-2026 Val Melamed
+
+namespace vm2.Abstractions;
 
 /// <summary>
 /// Provides a contract for validating entities' invariants.

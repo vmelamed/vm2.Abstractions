@@ -1,17 +1,18 @@
 // SPDX-License-Identifier: MIT
+// Copyright (c) 2025-2026 Val Melamed
 
 namespace vm2.Abstractions.Tests;
 
 public class CurrentTenantTests(ITestOutputHelper outputHelper) : TestBase(outputHelper)
 {
     [Fact]
-    public void TenantId_before_set_throws_InvalidOperationException()
+    public void TenantId_before_set_returns_default()
     {
         ICurrentTenant<Guid> sut = new CurrentTenant<Guid>();
 
-        var act = () => sut.TenantId;
+        var id = sut.TenantId;
 
-        act.Should().Throw<InvalidOperationException>();
+        id.Should().Be(default(Guid));
     }
 
     [Fact]

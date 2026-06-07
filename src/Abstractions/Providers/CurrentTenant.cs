@@ -8,7 +8,7 @@ namespace vm2.Abstractions.Providers;
 /// the tenant identifier flows with the logical asynchronous call.
 /// </summary>
 /// <typeparam name="TTenantId">
-/// The type of the tenant identifier. Must be non-nullable and implement <see cref="IEquatable{T}"/>.
+/// The type of the tenant identifier. MUST be a non-nullable type that implements <see cref="IEquatable{T}"/>.
 /// </typeparam>
 /// <remarks>
 /// The storage is <see langword="static"/> so that the accessor's behavior does not depend on its DI lifetime: whether
@@ -17,12 +17,12 @@ namespace vm2.Abstractions.Providers;
 /// allocated per closed generic type, so <c>CurrentTenant&lt;Guid&gt;</c> and <c>CurrentTenant&lt;TTenantId&gt;</c> for any
 /// other type parameter have entirely separate storage.
 /// <para>
-/// The value <c>default(TTenantId)</c> is reserved as the sentinel for the unset state. Attempts to set the tenant to
-/// <c>default(TTenantId)</c> throw <see cref="ArgumentException"/>.
+/// The value <c>default(TTenantId)</c> is reserved as the sentinel for the unset state, i.e. leverages the default interface
+/// implementation. Attempts to set the tenant to <c>default(TTenantId)</c> throw <see cref="ArgumentException"/>.
 /// </para>
 /// <para>
-/// The current tenant is <b>set-once per asynchronous context</b>. After the tenant has been set, attempts to change it
-/// throw <see cref="InvalidOperationException"/>; re-setting it to the same value is an idempotent no-op. This makes the
+/// The current tenant is <b>set-once per asynchronous context</b>. After the tenant has been set, attempting to change it
+/// throws <see cref="InvalidOperationException"/>; re-setting it to the same value is an idempotent no-op. This makes the
 /// accessor a structural authorization trust boundary: the authentication middleware at the edge of the application writes
 /// it once, and no downstream code can pivot to a different tenant.
 /// </para>
@@ -36,29 +36,26 @@ public class CurrentTenant<TTenantId> : ICurrentTenant<TTenantId> where TTenantI
     static readonly AsyncLocal<TTenantId> _tenantId = new();
 
     /// <summary>
-    /// Gets a value indicating whether a tenant has been set in the current asynchronous context.
+    /// Gets the identifier of the current tenant for the current asynchronous context.
     /// </summary>
-    public bool IsSet
-        => !EqualityComparer<TTenantId>.Default.Equals(_tenantId.Value, default);
-
-    /// <summary>
-    /// Gets the identifier of the current tenant for the current asynchronous context/UoW.
-    /// </summary>
-    /// <exception cref="InvalidOperationException">Thrown when the current tenant has not been set.</exception>
+    /// <remarks>
+    /// If the tenant has not been set in the current asynchronous context, this property returns <c>default(TTenantId)</c>,
+    /// which is the reserved sentinel value for the unset state and MUST NOT be used as a real tenant identifier. If the type
+    /// parameter is a reference type, the getter returns <see langword="null"/> when the tenant is not set.
+    /// </remarks>
     public TTenantId TenantId
     {
-        get => IsSet
-                ? _tenantId.Value!
-                : throw new InvalidOperationException("The current tenant is not set.");
+        get => _tenantId.Value!;
         private set => _tenantId.Value = value;
     }
 
     /// <summary>
-    /// Sets the current tenant identifier for the current asynchronous context/UoW. Set-once per context: re-setting to
-    /// the same value is an idempotent no-op; attempting to change it throws <see cref="InvalidOperationException"/>.
+    /// Sets the current tenant identifier for the current asynchronous context. Set-once per context: re-setting a non-default
+    /// value to the same value is an idempotent no-op; attempting to re-set the current, non-default, tenant identifier to a
+    /// different value throws <see cref="InvalidOperationException"/>.
     /// </summary>
     /// <param name="tenantId">
-    /// The identifier of the tenant to set as the current tenant. Must not equal <c>default(TTenantId)</c>.
+    /// The identifier of the tenant to set as the current tenant. MUST NOT equal <c>default(TTenantId)</c>.
     /// </param>
     /// <exception cref="ArgumentException">
     /// Thrown when <paramref name="tenantId"/> equals <c>default(TTenantId)</c>, which is reserved as the unset sentinel.
@@ -66,26 +63,24 @@ public class CurrentTenant<TTenantId> : ICurrentTenant<TTenantId> where TTenantI
     /// <exception cref="InvalidOperationException">
     /// Thrown when the current tenant has already been set in this asynchronous context to a different value.
     /// </exception>
-    public void SetCurrentTenant(TTenantId tenantId)
+    /// <remarks>
+    /// Callers MUST ensure SetCurrentTenant is not called concurrently on the same logical context.
+    /// </remarks>
+    public void SetCurrentTenant([NotNull] TTenantId tenantId)
     {
         var comparer = EqualityComparer<TTenantId>.Default;
 
         if (comparer.Equals(tenantId, default))
             throw new ArgumentException(
-                $"The tenant identifier cannot be the default value of {typeof(TTenantId).Name}. " +
-                "That value is reserved as the unset sentinel.",
+                $"The tenant identifier cannot be the default value of {typeof(TTenantId).Name}. That value is reserved as the unset sentinel.",
                 nameof(tenantId));
 
         var current = _tenantId.Value;
-        if (!comparer.Equals(current, default))
-        {
-            if (comparer.Equals(current, tenantId))
-                return;
 
-            throw new InvalidOperationException(
-                "The current tenant is already set in this asynchronous context and cannot be changed.");
-        }
-
-        TenantId = tenantId;
+        if (comparer.Equals(current, default))
+            TenantId = tenantId;
+        else
+        if (!comparer.Equals(current, tenantId))
+            throw new InvalidOperationException("The current tenant is already set in this asynchronous context and cannot be changed.");
     }
 }

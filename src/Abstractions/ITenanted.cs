@@ -27,6 +27,7 @@ public interface ITenanted<TTenantId> : ITenanted where TTenantId : notnull, IEq
 {
     /// <summary>
     /// Gets the tenant identifier of this object.
+    /// Gets the tenant identifier of this object.
     /// </summary>
     /// <remarks>
     /// By convention, the value <c>default(TTenantId)</c> (e.g., <see cref="Guid.Empty"/>, <c>0</c>, <c>null</c>) is used as

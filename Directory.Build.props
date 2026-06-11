@@ -22,12 +22,10 @@
         <!-- Property to be used in conditions for detecting benchmark tests -->
         <IsInBenchmarksFolder Condition="
             $([System.Text.RegularExpressions.Regex]::IsMatch($(MSBuildProjectDirectory), '[/\\]benchmarks?[/\\]', System.Text.RegularExpressions.RegexOptions.IgnoreCase))
-            $([System.Text.RegularExpressions.Regex]::IsMatch($(MSBuildProjectDirectory), '[/\\]benchmarks?[/\\]', System.Text.RegularExpressions.RegexOptions.IgnoreCase))
             ">true</IsInBenchmarksFolder>
 
         <!-- Property to be used in conditions for detecting example usage projects -->
         <IsInExamplesFolder Condition="
-            $([System.Text.RegularExpressions.Regex]::IsMatch($(MSBuildProjectDirectory), '[/\\]examples?[/\\]', System.Text.RegularExpressions.RegexOptions.IgnoreCase))
             $([System.Text.RegularExpressions.Regex]::IsMatch($(MSBuildProjectDirectory), '[/\\]examples?[/\\]', System.Text.RegularExpressions.RegexOptions.IgnoreCase))
             ">true</IsInExamplesFolder>
     </PropertyGroup>
@@ -85,7 +83,6 @@
         <Product>vm2</Product>
         <ProductName>vm2 packages and tools</ProductName>
         <Authors>Val Melamed</Authors>
-        <Copyright>Copyright ©2025-2026 vm</Copyright>
         <Copyright>Copyright ©2025-2026 vm</Copyright>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>

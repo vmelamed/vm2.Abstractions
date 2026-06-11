@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.0.0-preview.3 - 2026-06-11
+
+### Internal
+
+- update cache-pattern description for clarity
+
 ## v1.0.0-preview.2 - 2026-06-11
 
 ### Added

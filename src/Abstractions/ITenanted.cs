@@ -36,6 +36,7 @@ public interface ITenanted<TTenantId> : ITenanted where TTenantId : notnull, IEq
     TTenantId TenantId { get; }
 
     /// <inheritdoc/>
+    [ExcludeFromCodeCoverage]
     bool ITenanted.SameTenantAs(ITenanted otherTenant)
         => otherTenant is ITenanted<TTenantId> t
            && !EqualityComparer<TTenantId>.Default.Equals(TenantId, default)

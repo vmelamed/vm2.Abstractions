@@ -1,4 +1,7 @@
-name: Publish NuGet Stable Release
+name: Publish Release NuGet Package
+
+# This workflow handles the publishing of NuGet stable releases. It is only **triggered manually** via the workflow_dispatch
+# event from the **main branch**.
 
 on:
   # we release from main only, on manual trigger only
@@ -40,7 +43,7 @@ jobs:
       save-package-artifacts: ${{ steps.gather-params.outputs.save-package-artifacts }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Setup DevOps environment variables
         id: setup-env
@@ -102,7 +105,7 @@ jobs:
     uses: vmelamed/vm2.DevOps/.github/workflows/_release.yaml@main
     secrets:
       RELEASE_PAT: ${{ secrets.RELEASE_PAT }} # Required PAT for pushing changelog and tags past branch protection.
-      # *TODO* Make sure to set the API key issued by the selected NuGet server.
+      # Make sure to set the API key issued by the selected NuGet server.
       NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
     permissions:
       contents: write # Required to checkout the code, push changelog, and create tags

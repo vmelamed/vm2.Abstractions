@@ -66,7 +66,7 @@ public class CurrentTenant<TTenantId> : ICurrentTenant<TTenantId> where TTenantI
     /// <remarks>
     /// Callers MUST ensure SetCurrentTenant is not called concurrently on the same logical context.
     /// </remarks>
-    public void SetCurrentTenant([NotNull] TTenantId tenantId)
+    public void SetCurrentTenant(TTenantId tenantId)
     {
         var comparer = EqualityComparer<TTenantId>.Default;
 
@@ -80,7 +80,7 @@ public class CurrentTenant<TTenantId> : ICurrentTenant<TTenantId> where TTenantI
         if (comparer.Equals(current, default))
             TenantId = tenantId;
         else
-        if (!comparer.Equals(current, tenantId))
-            throw new InvalidOperationException("The current tenant is already set in this asynchronous context and cannot be changed.");
+            if (!comparer.Equals(current, tenantId))
+                throw new InvalidOperationException("The current tenant is already set in this asynchronous context and cannot be changed.");
     }
 }

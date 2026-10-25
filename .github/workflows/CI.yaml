@@ -190,7 +190,7 @@ jobs:
   # Replaces per-job required checks that break with reusable workflows + matrix (check names include
   # workflow prefix, matrix params, inner job names, and event suffixes that are impossible to predict).
   postrun-ci:
-    name: Postrun-CI
+    name: ${{ github.event_name == 'push' && 'Postrun-CI (push)' || 'Postrun-CI' }}
     needs:
       - prerun-ci
       - run-ci

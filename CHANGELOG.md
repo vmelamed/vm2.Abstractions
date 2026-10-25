@@ -1,5 +1,19 @@
 # Changelog
 
+## v1.0.0-preview.4 - 2026-10-25
+
+### Fixed
+
+- bring CI.yaml up to date
+- long overdue diff-shared
+- update packages
+
+### Internal
+
+- sync, no code changes [skip ci]
+- Bump the minor-and-patch group with 1 update
+- Bump the minor-and-patch group with 2 updates
+
 ## v1.0.0-preview.3 - 2026-06-11
 
 ### Internal

@@ -1,4 +1,7 @@
-name: "Auto-merge automated dependency PRs"
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2025-2026 Val Melamed
+
+name: "Auto-merge Update PRs by Dependabot"
 
 # Automatically enables auto-merge (rebase) on Dependabot PRs and on
 # github-actions[bot] PRs labelled 'dependencies' (e.g. lock-file refresh).

@@ -34,6 +34,7 @@ env:
     [
     "src/Abstractions/Abstractions.csproj"
     ]
+
   PREPROCESSOR_SYMBOLS: ""
   NUGET_SERVER: ${{ vars.NUGET_SERVER || 'nuget' }}
   NUGET_USERNAME: ${{ vars.NUGET_USERNAME || 'valo' }}

@@ -20,8 +20,14 @@ env:
     [
     "src/Abstractions/Abstractions.csproj"
     ]
+  # *TODO* Semicolon-separated preprocessor symbols to pass to the compiler.
   PREPROCESSOR_SYMBOLS: ""
+  # *TODO*: The NuGet server to use for publishing the packages.
   NUGET_SERVER: ${{ vars.NUGET_SERVER || 'nuget' }}
+  # *TODO*: The NuGet server may use the credentials vars.NUGET_USERNAME and secrets.NUGET_API_KEY. The NuGet server
+  #   - 'nuget' is NuGet.org with NUGET_USERNAME=valo. It uses trusted publishing and DOES NOT NEED secrets.NUGET_API_KEY.
+  #   - 'github' - GitHub Packages NEEDS neither NUGET_USERNAME nor NUGET_API_KEY:
+  #   - other servers - specified by URI, the credentials are server-specific.
   NUGET_USERNAME: ${{ vars.NUGET_USERNAME || 'valo' }}
   MINVERTAGPREFIX: ${{ vars.MINVERTAGPREFIX || 'v' }}                           # The MinVer tag prefix.
   VERBOSE: ${{ vars.VERBOSE || false }}                                         # Set the variable to "true" to enable verbose logging in scripts.
